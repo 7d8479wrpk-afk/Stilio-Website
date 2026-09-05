@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.next/
+out/
+build/
+coverage/
+
+.env
+.env.local
+.env*.local
+
+packages/design-agents/projects/*.json
+!packages/design-agents/projects/.gitkeep
+
+*.log
+.DS_Store
+.turbo/
+next-env.d.ts
+
+# local tooling
+.claude/
+_shots.mjs
+_shot.mjs

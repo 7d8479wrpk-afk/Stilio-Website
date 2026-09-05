@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   STILIO — design tokens
+   Brand kit: Onyx / Espresso / Antique Gold / Champagne / Soft Stone / Warm Marble
+   Ratio ~60% cream · 30% onyx · 10% gold. No gradients. No pure black/white.
+   Type: Cormorant Garamond (display) · Jost (text/UI).
+   ========================================================================= */
+
+@theme {
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", ui-sans-serif, system-ui, sans-serif;
+
+  /* Raw brand palette */
+  --color-onyx: #16140f;
+  --color-espresso: #2e2a23;
+  --color-gold: #b0894c;
+  --color-gold-ink: #7a5c27; /* text-safe gold on cream — 5.0:1 on #e9e6dd, 5.4:1 on #f3efe6 */
+  --color-danger: #8a4a30; /* warm terracotta, on-brand — reserved for error states so gold stays a "seasoning" — 6.4:1 on #fbf8f1 */
+  --color-champagne: #cbae7b;
+  --color-stone: #d8cfbe;
+  --color-marble: #f3efe6;
+
+  /* Semantic — warm light identity */
+  --color-canvas: #f3efe6;
+  --color-surface: #fbf8f1;
+  --color-surface-deep: #ece5d7;
+  --color-line: #ddd4c3;
+  --color-line-strong: #cbbfa8;
+  --color-field-border: #8f846d; /* input borders — 3.1:1 non-text contrast on #fbf8f1 */
+  --color-ink: #16140f;
+  --color-ink-2: #5b5348;
+  --color-ink-3: #6e6455;
+
+  /* On onyx sections */
+  --color-onyx-surface: #211d16;
+  --color-on-onyx: #f3efe6;
+  --color-on-onyx-2: #b8ae9c;
+  --color-on-onyx-3: #9a9080;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --shadow-panel: 0 1px 2px rgba(22, 20, 15, 0.05), 0 14px 44px -16px rgba(22, 20, 15, 0.16);
+  --shadow-float: 0 2px 6px rgba(22, 20, 15, 0.07), 0 34px 80px -28px rgba(22, 20, 15, 0.32);
+
+  /* Micro-label type scale, exposed as `text-*` utilities so components stop
+     inventing one-off `text-[0.6rem]` values. Three roles, not thirteen. */
+  --text-micro: 0.6rem; /* tiniest labels: hex codes, palette captions */
+  --text-meta: 0.68rem; /* the workhorse uppercase tracked label: nav, buttons, card meta */
+  --text-caption: 0.78rem; /* helper text, hints, small body */
+  --text-body-sm: 0.94rem; /* card body, facts, secondary copy */
+}
+
+/* Type scale — one caption, one meta, three text steps, then display */
+:root {
+  --step-meta: 0.68rem; /* uppercase metadata, tracking 0.2em */
+  --step-caption: 0.78rem; /* small labels / eyebrow */
+  --step-body-sm: 0.9rem; /* captions, card body, facts */
+  --step-body: 1.02rem; /* default body */
+  --step-1: clamp(1.1rem, 0.92rem + 0.5vw, 1.24rem);
+  --step-2: clamp(1.4rem, 1.1rem + 1vw, 1.8rem);
+  --step-3: clamp(1.8rem, 1.35rem + 1.8vw, 2.55rem);
+  --step-4: clamp(2.15rem, 1.55rem + 2.8vw, 3.4rem);
+  --step-display: clamp(2.85rem, 1.7rem + 5.1vw, 5.3rem);
+
+  --measure: 64ch;
+  --page-x: clamp(1.25rem, 5vw, 5rem);
+  --section-y: clamp(4.5rem, 9vw, 9rem);
+  --shell-max: 88rem;
+  --header-h: 5.75rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
+    background-color: var(--color-canvas);
+  }
+
+  body {
+    position: relative;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: var(--step-body);
+    line-height: 1.62;
+    letter-spacing: 0.005em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    line-height: 1.06;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: var(--color-champagne);
+    color: var(--color-onyx);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-ink);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::placeholder { color: var(--color-ink-3); opacity: 1; }
+
+  /* iOS Safari zooms on focus for fields under 16px — floor them on small screens */
+  @media (max-width: 640px) {
+    input, select, textarea { font-size: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--shell-max);
+    margin-inline: auto;
+    padding-inline: var(--page-x);
+  }
+
+  .section {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--section-y);
+  }
+
+  .measure { max-width: var(--measure); }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--step-caption);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold-ink);
+  }
+  .on-onyx .eyebrow { color: var(--color-champagne); }
+
+  .display {
+    font-family: var(--font-display);
+    font-size: var(--step-display);
+    font-weight: 400;
+    line-height: 1.03;
+    letter-spacing: -0.012em;
+  }
+  .display em { font-style: italic; font-weight: 400; }
+
+  .h-editorial {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.1;
+    font-weight: 400;
+  }
+
+  .lede {
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--color-ink-2);
+    font-weight: 300;
+  }
+
+  .rule {
+    height: 1px;
+    width: 100%;
+    background: var(--color-line-strong);
+    border: 0;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s var(--ease-out-soft);
+  }
+  .link-underline:hover { background-size: 100% 1px; }
+  @media (prefers-reduced-motion: reduce) {
+    .link-underline { transition: none; }
+  }
+
+  .on-onyx {
+    background-color: var(--color-onyx);
+    color: var(--color-on-onyx);
+  }
+  .on-onyx h1, .on-onyx h2, .on-onyx h3, .on-onyx h4 { color: var(--color-on-onyx); }
+  .on-onyx .lede { color: var(--color-on-onyx-2); }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  /* CSS-driven so it doesn't hold a JS rAF open for the life of the page */
+  @keyframes stilio-scroll-cue {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+  }
+  .scroll-cue {
+    transform-origin: top;
+    animation: stilio-scroll-cue 2.4s var(--ease-out-soft, ease-in-out) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue { animation: none; transform: scaleY(0.6); }
+  }
+
+  /* JS-free entrance animations — replaces framer-motion for simple fades */
+  @keyframes stilio-fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes stilio-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .anim-fade-up { animation: stilio-fade-up 0.75s var(--ease-out-soft) both; }
+  .anim-fade { animation: stilio-fade 0.4s var(--ease-out-soft) both; }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-fade-up, .anim-fade { animation: none; }
+  }
+
+  /* image loading placeholder — a quiet opacity breathe, no gradient (brand rule) */
+  @keyframes stilio-skeleton {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .skeleton {
+    background-color: var(--color-surface-deep);
+    animation: stilio-skeleton 1.6s var(--ease-in-out-soft, ease-in-out) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton { animation: none; opacity: 0.9; }
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}

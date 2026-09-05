@@ -1,0 +1,23 @@
+{
+  "name": "stilio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Stilio — luxury interior design studio: procedural 3D experience + AI design team.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @stilio/web",
+    "build": "npm run build --workspace @stilio/web",
+    "start": "npm run start --workspace @stilio/web",
+    "lint": "npm run lint --workspace @stilio/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspace @stilio/design-agents",
+    "agents:example": "npm run example --workspace @stilio/design-agents",
+    "agents:chat": "npm run chat --workspace @stilio/design-agents"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
