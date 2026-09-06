@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ArrowRight } from "@/components/ui/icons";
-import { brand } from "@/lib/tokens";
+import { addressInline, brand } from "@/lib/tokens";
 import { primaryNav } from "@/lib/nav";
 
 const year = new Date().getFullYear();
@@ -54,9 +54,7 @@ export function SiteFooter() {
             {brand.phoneDisplay}
           </a>
           <address className="mt-2 not-italic text-[0.9rem] leading-relaxed text-[color:var(--color-on-onyx-3)]">
-            {brand.address.line1}, {brand.address.line2}
-            <br />
-            {brand.address.postcode} {brand.address.city}, {brand.address.country}
+            {addressInline}
           </address>
           <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
             {brand.social.map((s) => (

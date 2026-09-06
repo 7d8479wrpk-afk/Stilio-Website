@@ -92,8 +92,11 @@ export function organizationJsonLd() {
     telephone: brand.phoneDisplay,
     address: {
       "@type": "PostalAddress",
-      streetAddress: `${brand.address.line1}, ${brand.address.line2}`,
-      postalCode: brand.address.postcode,
+      // only include street/postcode when they're actually set
+      ...(brand.address.line1
+        ? { streetAddress: [brand.address.line1, brand.address.line2].filter(Boolean).join(", ") }
+        : {}),
+      ...(brand.address.postcode ? { postalCode: brand.address.postcode } : {}),
       addressLocality: brand.address.city,
       addressCountry: brand.address.country,
     },

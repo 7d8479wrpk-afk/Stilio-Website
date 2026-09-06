@@ -21,15 +21,15 @@ export const brand = {
   legalName: "Stilio Interior Design & Renovation",
   tagline: "Interior Design & Renovation",
   domain: "stilio.studio",
-  email: "studio@stilio.studio",
-  phoneDisplay: "+33 1 84 80 12 40",
-  phoneHref: "+33184801240",
+  email: "info.stiliojo@gmail.com",
+  phoneDisplay: "+962 79 966 0966",
+  phoneHref: "+962799660966",
   address: {
-    line1: "18 Rue des Archives",
-    line2: "Studio 4",
-    city: "Paris",
-    postcode: "75004",
-    country: "France",
+    line1: "",
+    line2: "",
+    city: "Amman",
+    postcode: "",
+    country: "Jordan",
   },
   social: [
     { label: "Instagram", href: "https://instagram.com" },
@@ -37,3 +37,14 @@ export const brand = {
     { label: "LinkedIn", href: "https://linkedin.com" },
   ],
 } as const;
+
+/** The postal address as display lines, with any empty parts dropped. */
+export const addressLines: string[] = [
+  brand.address.line1,
+  brand.address.line2,
+  [brand.address.postcode, brand.address.city].filter(Boolean).join(" "),
+  brand.address.country,
+].filter((line) => line.trim().length > 0);
+
+/** One-line address, e.g. for meta descriptions. */
+export const addressInline = addressLines.join(", ");

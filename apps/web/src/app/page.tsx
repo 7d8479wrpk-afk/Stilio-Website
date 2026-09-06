@@ -10,7 +10,7 @@ import { organizationJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   description:
-    "Stilio is a Paris interior design studio. Walk an interactive 3D interior, change the light and materials, then start a project with the studio.",
+    "Stilio is an Amman interior design studio. Walk an interactive 3D interior, change the light and materials, then start a project with the studio.",
   alternates: { canonical: "/" },
 };
 

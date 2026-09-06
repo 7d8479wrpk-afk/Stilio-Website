@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { EnquiryForm } from "@/components/contact/EnquiryForm";
-import { brand } from "@/lib/tokens";
+import { addressLines, brand } from "@/lib/tokens";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -42,11 +42,11 @@ export default function ContactPage() {
           <div>
             <Eyebrow>Address</Eyebrow>
             <address className="mt-2 not-italic text-[0.98rem] leading-relaxed text-[color:var(--color-ink-2)]">
-              {brand.address.line1}, {brand.address.line2}
-              <br />
-              {brand.address.postcode} {brand.address.city}
-              <br />
-              {brand.address.country}
+              {addressLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </address>
           </div>
           <div>
