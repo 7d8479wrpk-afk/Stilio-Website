@@ -3,20 +3,21 @@ import { Logo } from "@/components/brand/Logo";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ArrowRight } from "@/components/ui/icons";
 import { addressInline, brand } from "@/lib/tokens";
-import { primaryNav } from "@/lib/nav";
+import { footerNav, primaryNav } from "@/lib/nav";
+import { services } from "@/lib/services";
 
 const year = new Date().getFullYear();
 
 export function SiteFooter() {
   return (
     <footer className="on-onyx grain relative overflow-hidden">
-      <div className="shell relative grid gap-14 py-[clamp(4rem,7vw,6.5rem)] md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="shell relative grid gap-14 py-[clamp(4rem,7vw,6.5rem)] md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
         <div className="max-w-sm">
           <Logo onDark />
           <p className="mt-6 text-[0.95rem] leading-relaxed text-[color:var(--color-on-onyx-2)]">
-            An interior design and renovation studio. We plan the space, set the
-            material palette, and see the build through — the same team from
-            the first sketch to the last light.
+            An interior design and renovation studio in {brand.address.city}. We plan
+            the space, set the material palette, and see the build through — the same
+            team from the first sketch to the last light.
           </p>
           <Link
             href="/contact"
@@ -28,13 +29,26 @@ export function SiteFooter() {
 
         <nav aria-label="Footer" className="flex flex-col gap-3">
           <Eyebrow className="mb-2">Explore</Eyebrow>
-          {primaryNav.map((item) => (
+          {[...primaryNav, ...footerNav].map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className="link-underline w-fit text-[0.95rem] text-[color:var(--color-on-onyx-2)] hover:text-[color:var(--color-marble)]"
             >
               {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <nav aria-label="Services" className="flex flex-col gap-3">
+          <Eyebrow className="mb-2">Services</Eyebrow>
+          {services.map((s) => (
+            <Link
+              key={s.slug}
+              href={`/services/${s.slug}`}
+              className="link-underline w-fit text-[0.95rem] text-[color:var(--color-on-onyx-2)] hover:text-[color:var(--color-marble)]"
+            >
+              {s.name}
             </Link>
           ))}
         </nav>

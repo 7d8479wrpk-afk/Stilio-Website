@@ -1,32 +1,10 @@
+import Link from "next/link";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArrowRight } from "@/components/ui/icons";
+import { services } from "@/lib/services";
 
-const services = [
-  {
-    n: "A",
-    title: "Interior Design",
-    body:
-      "Concept, spatial planning, joinery detailing, furniture and styling. A complete scheme, drawn and documented.",
-  },
-  {
-    n: "B",
-    title: "Renovation",
-    body:
-      "Structural changes, services, finishes and site management. We hold the drawings and the programme together.",
-  },
-  {
-    n: "C",
-    title: "Material & Lighting",
-    body:
-      "A resolved palette of stone, timber and textile, and a four-layer lighting design tuned scene by scene.",
-  },
-  {
-    n: "D",
-    title: "3D Visualisation",
-    body:
-      "Every scheme is modelled before a wall moves — so you walk the room, in the right light, before you commit.",
-  },
-];
+const LETTERS = ["A", "B", "C", "D"];
 
 export function Capabilities() {
   return (
@@ -41,20 +19,24 @@ export function Capabilities() {
 
         <div className="mt-14 grid gap-px border border-[color:var(--color-onyx-surface)] bg-[color:var(--color-onyx-surface)] sm:grid-cols-2">
           {services.map((s, i) => (
-            <Reveal
-              key={s.title}
-              delay={i * 80}
-              className="bg-[color:var(--color-onyx)] p-8 md:p-11"
-            >
-              <span className="font-display text-[1.3rem] text-[color:var(--color-champagne)]">
-                {s.n}
-              </span>
-              <h3 className="mt-4 font-display text-[1.55rem] font-normal text-[color:var(--color-marble)]">
-                {s.title}
-              </h3>
-              <p className="mt-3 max-w-sm text-[0.96rem] leading-relaxed text-[color:var(--color-on-onyx-2)]">
-                {s.body}
-              </p>
+            <Reveal key={s.slug} delay={i * 80} className="bg-[color:var(--color-onyx)]">
+              <Link
+                href={`/services/${s.slug}`}
+                className="group block h-full p-8 transition-colors hover:bg-[color:var(--color-onyx-surface)] md:p-11"
+              >
+                <span className="font-display text-[1.3rem] text-[color:var(--color-champagne)]">
+                  {LETTERS[i]}
+                </span>
+                <h3 className="mt-4 font-display text-[1.55rem] font-normal text-[color:var(--color-marble)]">
+                  {s.name}
+                </h3>
+                <p className="mt-3 max-w-sm text-[0.96rem] leading-relaxed text-[color:var(--color-on-onyx-2)]">
+                  {s.summary}
+                </p>
+                <span className="link-underline mt-4 inline-flex items-center gap-2 font-sans text-micro uppercase tracking-[0.2em] text-[color:var(--color-champagne)]">
+                  Learn more <ArrowRight width={13} height={13} />
+                </span>
+              </Link>
             </Reveal>
           ))}
         </div>

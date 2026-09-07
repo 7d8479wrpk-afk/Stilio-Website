@@ -3,7 +3,6 @@ import { Cormorant_Garamond, Jost } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { brand } from "@/lib/tokens";
-import { photos } from "@/lib/photography";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -37,14 +36,7 @@ export const metadata: Metadata = {
     description:
       "Amman interior design and renovation — an interactive 3D interior, a real material library, and a studio that stays on site to the last light.",
     locale: "en_GB",
-    images: [
-      {
-        url: photos.livingScandiCalm.src,
-        width: photos.livingScandiCalm.width,
-        height: photos.livingScandiCalm.height,
-        alt: photos.livingScandiCalm.alt,
-      },
-    ],
+    // default social card comes from app/opengraph-image.tsx; pages can override
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },

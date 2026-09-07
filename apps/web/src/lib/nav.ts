@@ -5,6 +5,7 @@ export interface NavItem {
 
 export const primaryNav: NavItem[] = [
   { label: "Studio", href: "/studio" },
+  { label: "Services", href: "/services" },
   // labelled device-neutrally — desktop gets the interactive 3D room, phones
   // get the studio film in the same spot, so "3D" would overpromise on mobile
   { label: "The Room", href: "/#experience" },
@@ -12,6 +13,12 @@ export const primaryNav: NavItem[] = [
   { label: "Materials", href: "/materials" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+];
+
+/** Secondary links surfaced in the footer only. */
+export const footerNav: NavItem[] = [
+  { label: "Interior design in Amman", href: "/interior-design-amman" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 export const ctaNav: NavItem = { label: "Start a Project", href: "/contact" };

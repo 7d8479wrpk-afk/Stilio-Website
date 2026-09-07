@@ -1,4 +1,5 @@
 import { photos } from "@/lib/photography";
+import { projects, type Project } from "@/lib/projects";
 
 export type PhotoKey = keyof typeof photos;
 
@@ -338,3 +339,25 @@ export const materials: Material[] = [
     previewTarget: "wall",
   },
 ];
+
+export function getMaterial(slug: string): Material | undefined {
+  return materials.find((m) => m.slug === slug);
+}
+
+export function materialsByCategory(category: MaterialCategory): Material[] {
+  return materials.filter((m) => m.category === category);
+}
+
+/** The project whose archive photo this material is shown in, if any. */
+export function materialProject(material: Material): Project | undefined {
+  return projects.find(
+    (p) => p.cover === material.photo || p.gallery.includes(material.photo),
+  );
+}
+
+/** Materials whose archive photo appears in this project. */
+export function projectMaterials(project: Project): Material[] {
+  return materials.filter(
+    (m) => project.cover === m.photo || project.gallery.includes(m.photo),
+  );
+}

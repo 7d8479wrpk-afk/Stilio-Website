@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight } from "@/components/ui/icons";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { photos } from "@/lib/photography";
 import { getProject, projects } from "@/lib/projects";
+import { projectMaterials } from "@/lib/materials";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -44,6 +45,7 @@ export default async function ProjectDetailPage({
   const next = projects[(idx + 1) % projects.length]!;
   const gallery = project.gallery.map((k) => photos[k]);
   const [g0, g1, g2, g3] = gallery;
+  const usedMaterials = projectMaterials(project);
 
   return (
     <article className="bg-[color:var(--color-canvas)]">
@@ -121,6 +123,24 @@ export default async function ProjectDetailPage({
         {g1 ? <GalleryImage photo={g1} /> : null}
         {g2 ? <GalleryImage photo={g2} className="md:mt-16" /> : null}
       </div>
+
+      {usedMaterials.length > 0 ? (
+        <div className="shell pb-[clamp(4rem,8vw,7rem)]">
+          <Eyebrow>Materials in this project</Eyebrow>
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            {usedMaterials.map((m) => (
+              <li key={m.slug}>
+                <Link
+                  href={`/materials/${m.slug}`}
+                  className="link-underline font-sans text-meta uppercase tracking-[0.16em] text-[color:var(--color-ink-2)] hover:text-[color:var(--color-ink)]"
+                >
+                  {m.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {g1 && g3 ? (
         <div className="shell pb-[clamp(4rem,8vw,7rem)]">
