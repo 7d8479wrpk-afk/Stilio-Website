@@ -2,7 +2,7 @@
   "name": "stilio",
   "version": "0.1.0",
   "private": true,
-  "description": "Stilio — luxury interior design studio: procedural 3D experience + AI design team.",
+  "description": "Stilio — interior design & renovation studio site: Next.js 15 web app with a procedural 3D room.",
   "workspaces": [
     "packages/*",
     "apps/*"

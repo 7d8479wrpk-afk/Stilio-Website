@@ -24,25 +24,18 @@ const jost = Jost({
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${brand.domain}`),
   title: {
-    default: "Stilio — Interior Design & Renovation",
+    default: "Stilio — Interior Design & Renovation Studio in Amman",
     template: "%s · Stilio",
   },
   description:
-    "Stilio is an interior design and renovation studio. Explore an interactive 3D interior, change the light and materials, then start a project with the studio.",
-  keywords: [
-    "interior design studio",
-    "luxury interior design",
-    "renovation",
-    "interior architecture",
-    "3D interior visualization",
-  ],
+    "Stilio is an interior design and renovation studio in Amman, Jordan. Explore an interactive 3D interior, change the light and materials, then start a project with the studio.",
   authors: [{ name: brand.legalName }],
   openGraph: {
     type: "website",
     siteName: "Stilio",
-    title: "Stilio — Interior Design & Renovation",
+    title: "Stilio — Interior Design & Renovation Studio in Amman",
     description:
-      "An interactive 3D interior, a real material library, and a studio that stays on site to the last light.",
+      "Amman interior design and renovation — an interactive 3D interior, a real material library, and a studio that stays on site to the last light.",
     locale: "en_GB",
     images: [
       {

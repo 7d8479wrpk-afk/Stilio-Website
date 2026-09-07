@@ -7,7 +7,7 @@ import { photos } from "@/lib/photography";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "About Stilio — Amman Interior Design & Renovation Studio",
+  title: "About Stilio — Amman Interior Design Studio",
   description:
     "Stilio is a small interior design studio based in Amman, Jordan, working across Europe and North America — restraint, warm materials, one team throughout.",
   path: "/about",

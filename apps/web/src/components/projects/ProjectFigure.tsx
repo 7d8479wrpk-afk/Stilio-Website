@@ -15,11 +15,14 @@ export function ProjectFigure({
   priority = false,
   className,
   sizes = "(max-width: 768px) 100vw, 50vw",
+  /** h2 on the /projects listing (no section heading above it), h3 under a section heading */
+  titleLevel: TitleLevel = "h3",
 }: {
   project: Project;
   priority?: boolean;
   className?: string;
   sizes?: string;
+  titleLevel?: "h2" | "h3";
 }) {
   const cover: Photo = photos[project.cover];
   return (
@@ -46,9 +49,9 @@ export function ProjectFigure({
       </figure>
       <div className="mt-5 flex items-baseline justify-between gap-6">
         <div>
-          <h3 className="font-display text-[1.5rem] font-normal leading-tight text-[color:var(--color-ink)]">
+          <TitleLevel className="font-display text-[1.5rem] font-normal leading-tight text-[color:var(--color-ink)]">
             {project.name}
-          </h3>
+          </TitleLevel>
           <p className="mt-1 font-sans text-meta uppercase tracking-[0.2em] text-[color:var(--color-ink-3)]">
             {project.location} &middot; {project.year}
           </p>

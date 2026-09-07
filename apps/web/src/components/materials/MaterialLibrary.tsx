@@ -53,6 +53,7 @@ export function MaterialLibrary() {
   return (
     <div className="shell">
       <div id="material-grid">
+      <h2 className="sr-only">The material library</h2>
       <div
         role="group"
         aria-label="Filter materials by category"

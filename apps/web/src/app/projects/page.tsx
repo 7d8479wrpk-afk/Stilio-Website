@@ -31,6 +31,7 @@ export default function ProjectsPage() {
               <ProjectFigure
                 project={project}
                 priority={i === 0}
+                titleLevel="h2"
                 sizes="(max-width: 768px) 100vw, 55vw"
               />
               <p className="mt-3 max-w-md text-[0.92rem] leading-relaxed text-[color:var(--color-ink-2)]">

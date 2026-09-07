@@ -22,7 +22,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project) return { title: "Project not found" };
+  if (!project) return { title: "Project not found", robots: { index: false } };
   return pageMetadata({
     title: `${project.name} — ${project.style} Interior Design`,
     description: `${project.summary} ${project.location} · ${project.scope}.`,

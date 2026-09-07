@@ -6,12 +6,11 @@
 import type { Metadata } from "next";
 import { brand } from "@/lib/tokens";
 import { photos, type Photo } from "@/lib/photography";
-import { projects } from "@/lib/projects";
 
 export const SITE_URL = `https://${brand.domain}`;
 
 export function absoluteUrl(path: string): string {
-  if (path === "/" || path === "") return SITE_URL;
+  if (path === "/" || path === "") return `${SITE_URL}/`;
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
@@ -34,7 +33,9 @@ export function pageMetadata({
 }): Metadata {
   const url = absoluteUrl(path);
   return {
-    title,
+    // titles that already contain the brand skip the "%s · Stilio" template
+    // so we don't double-brand or overrun the SERP width
+    title: title.includes(brand.name) ? { absolute: title } : title,
     description,
     alternates: { canonical: path === "" ? "/" : path },
     openGraph: {
@@ -56,10 +57,16 @@ export function pageMetadata({
   };
 }
 
-/** Real service locations, drawn from HQ + the portfolio actually shown on /projects — never invented. */
-export const serviceAreas = Array.from(
-  new Set([brand.address.city, ...projects.map((p) => p.location.split(",")[0]!.trim())]),
-);
+/**
+ * Where the studio actually sells its services today — the HQ city and country.
+ * NOT the portfolio's past-project cities (those are portfolio facts, and
+ * claiming e.g. New York/Milan as a service area from an Amman studio reads as
+ * location spam and dilutes the local signal we want).
+ */
+const areaServed = [
+  { "@type": "City", name: brand.address.city },
+  { "@type": "Country", name: brand.address.country },
+];
 
 const realServices = [
   { name: "Interior Design", description: "Concept, spatial planning, joinery detailing, furniture and styling." },
@@ -83,13 +90,13 @@ export function organizationJsonLd() {
     "@type": ["ProfessionalService", "HomeAndConstructionBusiness"],
     name: brand.legalName,
     alternateName: brand.name,
-    url: SITE_URL,
+    url: absoluteUrl("/"),
     logo: absoluteUrl("/brand/logo-on-white.jpg"),
     image: absoluteUrl(photos.livingScandiCalm.src),
     description:
       "Interior design and renovation studio — spatial planning, material and lighting design, and end-to-end delivery.",
     email: brand.email,
-    telephone: brand.phoneDisplay,
+    telephone: brand.phoneHref,
     address: {
       "@type": "PostalAddress",
       // only include street/postcode when they're actually set
@@ -100,7 +107,7 @@ export function organizationJsonLd() {
       addressLocality: brand.address.city,
       addressCountry: brand.address.country,
     },
-    areaServed: serviceAreas.map((name) => ({ "@type": "City", name })),
+    areaServed,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Studio services",
